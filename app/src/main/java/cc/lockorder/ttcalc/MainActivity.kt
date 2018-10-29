@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         val recyclerView : RecyclerView = findViewById(R.id.rateListView)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = ExchangeRateAdapter(exchangeRates)
-
-        ExchangeRateService.fetch()
     }
 }
 
