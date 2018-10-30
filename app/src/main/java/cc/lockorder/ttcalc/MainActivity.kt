@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         val exchangeRates = ExchangeRateService.fetch()
         val onClickListener = View.OnClickListener {
@@ -38,6 +39,13 @@ object ExchangeRateService {
 
     fun fetch() : List<ExchangeRate> = listOf(
             ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
             ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(10.05))
         )
 }
@@ -52,14 +60,13 @@ class ExchangeRateAdapter(private val exchangeRates: List<ExchangeRate> = emptyL
                           private val onClickListener: View.OnClickListener)
     : RecyclerView.Adapter<ExchangeRateAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        val view : View = LayoutInflater.from(p0.context).inflate(R.layout.exchange_rate_item, p0, false)
-        view.calculateExchangeRateButton.setOnClickListener(onClickListener)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder =
+        ViewHolder(
+            LayoutInflater.from(viewGroup.context).inflate(R.layout.exchange_rate_item, viewGroup, false).apply {
+                calculateExchangeRateButton.setOnClickListener(onClickListener)})
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.nameTextView.text = exchangeRates[p1].currency.currencyCode.plus("@").plus(exchangeRates[p1].rate)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        viewHolder.nameTextView.text = exchangeRates[position].currency.currencyCode.plus("@").plus(exchangeRates[position].rate)
     }
 
     override fun getItemCount(): Int = exchangeRates.count()
