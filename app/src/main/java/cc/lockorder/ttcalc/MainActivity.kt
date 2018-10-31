@@ -11,13 +11,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container)
+        val fragmentContainer = findViewById<FrameLayout>(R.id.rate_list_fragment)
         if (fragmentContainer != null) {
             if (savedInstanceState != null) {
                 return
             }
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, ExchangeRateListFragment().apply { arguments = intent.extras }).commit()
+                .add(R.id.rate_list_fragment, ExchangeRateListFragment().apply { arguments = intent.extras }).commit()
         }
     }
 }
