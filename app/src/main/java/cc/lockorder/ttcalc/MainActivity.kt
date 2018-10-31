@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
         val exchangeRates = ExchangeRateService.fetch()
         val onClickListener = View.OnClickListener {
@@ -38,14 +37,14 @@ class MainActivity : AppCompatActivity() {
 object ExchangeRateService {
 
     fun fetch() : List<ExchangeRate> = listOf(
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
-            ExchangeRate(Currency.getInstance("HKD"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
+            ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(7.85)),
             ExchangeRate(Currency.getInstance("GBP"), BigDecimal.valueOf(10.05))
         )
 }
