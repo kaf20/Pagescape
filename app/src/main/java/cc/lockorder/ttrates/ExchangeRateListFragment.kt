@@ -44,8 +44,7 @@ class ExchangeRateListFragment : Fragment() {
 data class RateEntry(
     val shop: String,
     val currency: Currency,
-    val ttLongRate: BigDecimal?,
-    val ttShortRate: BigDecimal?,
+    val distanceFrom: BigDecimal,
     val noteLongRate: BigDecimal?,
     val noteShortRate: BigDecimal?
 )
@@ -60,8 +59,7 @@ class ExchangeRateAdapter(private val rateEntries: List<RateEntry> = emptyList()
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val entry = rateEntries[position]
         viewHolder.shopTextView.text = entry.shop
-        viewHolder.ttLongRateTextView.text = entry.ttLongRate?.toPlainString() ?: "-"
-        viewHolder.ttShortRateTextView.text = entry.ttShortRate?.toPlainString() ?: "-"
+        viewHolder.distanceFromTextView.text = entry.distanceFrom.toPlainString() ?: "-"
         viewHolder.noteLongRateTextView.text = entry.noteLongRate?.toPlainString() ?: "-"
         viewHolder.noteShortRateTextView.text = entry.noteShortRate?.toPlainString() ?: "-"
     }
@@ -70,8 +68,7 @@ class ExchangeRateAdapter(private val rateEntries: List<RateEntry> = emptyList()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var shopTextView = itemView.findViewById<TextView>(R.id.shop_text_view)!!
-        var ttLongRateTextView = itemView.findViewById<TextView>(R.id.tt_long_rate_text_view)!!
-        var ttShortRateTextView = itemView.findViewById<TextView>(R.id.tt_short_rate_text_view)!!
+        var distanceFromTextView = itemView.findViewById<TextView>(R.id.distance_from_text_view)!!
         var noteLongRateTextView = itemView.findViewById<TextView>(R.id.note_long_rate_text_view)!!
         var noteShortRateTextView = itemView.findViewById<TextView>(R.id.note_short_rate_text_view)!!
     }

@@ -91,11 +91,12 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
-    <string name="shop_header">Shop</string>
+    <string name="shop_header">Shops</string>
     <string name="tt_long_rate_header">TT Long Rate</string>
     <string name="tt_short_rate_header">TT Short Rate</string>
     <string name="note_long_rate_header">Note Long Rate</string>
     <string name="note_short_rate_header">Note Short Rate</string>
     <string name="header_sort_asc">up</string>
     <string name="header_sort_desc">down</string>
+    <string name="distance_from">Distance (KM)</string>
 </resources>

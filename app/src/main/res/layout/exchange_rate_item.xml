@@ -11,27 +11,21 @@
               android:layout_marginTop="16dp" app:layout_constraintStart_toStartOf="parent"
               android:layout_marginStart="8dp"/>
 
-    <TextView android:id="@+id/tt_long_rate_text_view"
-              android:layout_width="68dp"
-              android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-              android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@id/shop_text_view"
-              android:layout_marginStart="8dp"/>
-
-    <TextView android:id="@+id/tt_short_rate_text_view"
-              android:layout_width="68dp"
-              android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-              android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@id/tt_long_rate_text_view"
-              android:layout_marginStart="8dp"/>
-
     <TextView android:id="@+id/note_long_rate_text_view"
               android:layout_width="68dp"
               android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-              android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@id/tt_short_rate_text_view"
+              android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@id/shop_text_view"
               android:layout_marginStart="8dp"/>
 
     <TextView android:id="@+id/note_short_rate_text_view"
               android:layout_width="68dp"
               android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
               android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@id/note_long_rate_text_view"
+              android:layout_marginStart="8dp"/>
+
+    <TextView android:id="@+id/distance_from_text_view"
+              android:layout_width="68dp"
+              android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+              android:layout_marginTop="16dp" app:layout_constraintStart_toEndOf="@id/note_short_rate_text_view"
               android:layout_marginStart="8dp"/>
 </android.support.constraint.ConstraintLayout>
