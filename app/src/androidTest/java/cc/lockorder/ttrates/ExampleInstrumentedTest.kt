@@ -1,4 +1,4 @@
-package cc.lockorder.ttcalc
+package cc.lockorder.ttrates
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("cc.lockorder.ttcalc", appContext.packageName)
+        assertEquals("cc.lockorder.ttrates", appContext.packageName)
     }
 }

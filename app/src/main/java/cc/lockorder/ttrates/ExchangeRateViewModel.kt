@@ -1,4 +1,4 @@
-package cc.lockorder.ttcalc
+package cc.lockorder.ttrates
 
 import android.arch.lifecycle.ViewModel;
 import java.math.BigDecimal
