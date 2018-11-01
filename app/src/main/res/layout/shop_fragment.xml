@@ -11,6 +11,7 @@
                  android:layout_height="wrap_content"
                  android:background="@drawable/section_grey">
         <ImageView android:id="@+id/shop_image_view"
+                   android:contentDescription="@string/shop_header"
                    android:scaleType="fitXY"
                    android:layout_width="match_parent"
                    android:layout_height="200dp"/>
