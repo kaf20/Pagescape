@@ -12,8 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val fragmentContainer = findViewById<FrameLayout>(R.id.rate_list_fragment_container)
-        if (fragmentContainer != null) {
+        if (findViewById<FrameLayout>(R.id.rate_list_fragment_container) != null) {
             if (savedInstanceState != null) {
                 return
             }
