@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ttcalc</string>
+    <string name="app_name">TT Rates</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -91,7 +91,6 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_calculator">CalculatorActivity</string>
     <string name="shop_header">Shop</string>
     <string name="tt_long_rate_header">TT Long Rate</string>
     <string name="tt_short_rate_header">TT Short Rate</string>
