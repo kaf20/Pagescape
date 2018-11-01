@@ -3,17 +3,23 @@ package cc.lockorder.ttrates
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import cc.lockorder.ttrates.shop.ShopFragment
 import kotlinx.android.synthetic.main.exchange_rate_list_fragment.*
 import java.math.BigDecimal
 import java.util.*
 
 
 class ExchangeRateListFragment : Fragment() {
+
+    companion object {
+        fun newInstance() = ExchangeRateListFragment()
+    }
 
     private lateinit var viewModel: ExchangeRateViewModel
 
@@ -30,10 +36,9 @@ class ExchangeRateListFragment : Fragment() {
 
         exchange_rate_list_view.apply {
             setHasFixedSize(true)
-            adapter = ExchangeRateAdapter(viewModel.fetch())
+            adapter = ExchangeRateAdapter(fragmentManager!!, arguments, viewModel.fetch())
         }
     }
-
 }
 
 
@@ -49,12 +54,14 @@ data class RateEntry(
     val noteShortRate: BigDecimal?
 )
 
-class ExchangeRateAdapter(private val rateEntries: List<RateEntry> = emptyList())
+class ExchangeRateAdapter(private val fragmentManager: FragmentManager,
+                          private val arguments: Bundle?,
+                          private val rateEntries: List<RateEntry> = emptyList())
     : RecyclerView.Adapter<ExchangeRateAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder =
         ViewHolder(
-            LayoutInflater.from(viewGroup.context).inflate(R.layout.exchange_rate_item, viewGroup, false))
+            LayoutInflater.from(viewGroup.context).inflate(R.layout.exchange_rate_item, viewGroup, false), arguments)
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val entry = rateEntries[position]
@@ -66,8 +73,15 @@ class ExchangeRateAdapter(private val rateEntries: List<RateEntry> = emptyList()
 
     override fun getItemCount(): Int = rateEntries.count()
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var shopTextView = itemView.findViewById<TextView>(R.id.shop_text_view)!!
+    inner class ViewHolder(itemView: View, arguments: Bundle?) : RecyclerView.ViewHolder(itemView) {
+        var shopTextView = itemView.findViewById<TextView>(R.id.shop_text_view)!!.apply {
+            setOnClickListener {
+                fragmentManager.beginTransaction()
+                    .replace(R.id.rate_list_fragment_container, ShopFragment().apply { setArguments(arguments) })
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
         var distanceFromTextView = itemView.findViewById<TextView>(R.id.distance_from_text_view)!!
         var noteLongRateTextView = itemView.findViewById<TextView>(R.id.note_long_rate_text_view)!!
         var noteShortRateTextView = itemView.findViewById<TextView>(R.id.note_short_rate_text_view)!!
