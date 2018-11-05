@@ -1,4 +1,4 @@
-# redux-saga-beginner-tutorial
+# ttcalc
 Companion Repo for [Redux/Redux-saga beginner tutorial](https://github.com/redux-saga/redux-saga/blob/master/docs/introduction/BeginnerTutorial.md)
 
 # Instructions
@@ -7,9 +7,9 @@ Setup
 
 ```
 // clone the repo
-git clone https://github.com/yelouafi/redux-saga-beginner-tutorial.git
+git clone https://github.com/redux-saga/ttcalc.git
 
-cd redux-saga-beginner-tutorial
+cd ttcalc
 
 npm install
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "redux-saga-beginner-tutorial",
+  "name": "ttcalc",
   "version": "0.0.0",
   "description": "Redux Saga beginner tutorial",
   "main": "lib/index.js",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/redux-saga/redux-saga-beginner-tutorial.git"
+    "url": "git+https://github.com/kaf20/ttcalc.git"
   },
-  "author": "Yassine ELOUAFI <yelouafi@gmail.com>",
+  "author": "Nelson Lau <nelson.kf.lau@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "6.3.14",
