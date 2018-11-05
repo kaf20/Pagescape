@@ -1,7 +1,7 @@
 # ttcalc
 Companion Repo for [Redux/Redux-saga beginner tutorial](https://github.com/redux-saga/redux-saga/blob/master/docs/introduction/BeginnerTutorial.md)
 
-# Instructions
+# Getting Started
 
 Setup
 
@@ -11,17 +11,17 @@ git clone https://github.com/redux-saga/ttcalc.git
 
 cd ttcalc
 
-npm install
+yarn install
 ```
 
 Run the demo
 
 ```
-npm start
+yarn start
 ```
 
 Run tests
 
 ```
-npm test
+yarn test
 ```
