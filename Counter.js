@@ -1,25 +1,32 @@
 /*eslint-disable no-unused-vars */
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
-const Counter = ({ value, onIncrement, onDecrement }) =>
-      <div>
-        <button onClick={onIncrement}>
-          Increment
+const Counter = ({dispatch, state}) =>
+    <div>
+        <button onClick={() => dispatch('SGA_INCREMENT_ASYNC')}>
+            Increment after 1 second
         </button>
         {' '}
-        <button onClick={onDecrement}>
-          Decrement
+        <button onClick={() => dispatch('RDR_INCREMENT')}>
+            Increment
+        </button>
+        {' '}
+        <button onClick={() => dispatch('RDR_DECREMENT')}>
+            Decrement
+        </button>
+        {' '}
+        <button onClick={() => dispatch('DONE')}>
+            Done
         </button>
         <hr />
         <div>
-          Clicked: {value} times
+            Clicked: {state} times
         </div>
-      </div>
+    </div>
 
 Counter.propTypes = {
-  value: PropTypes.number.isRequired,
-  onIncrement: PropTypes.func.isRequired,
-  onDecrement: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    state: PropTypes.number.isRequired
 }
 
 export default Counter
