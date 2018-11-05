@@ -15,7 +15,7 @@ const Counter = ({dispatch, state}) =>
             Decrement
         </button>
         {' '}
-        <button onClick={() => dispatch('DONE')}>
+        <button onClick={() => dispatch('SGA_DONE')}>
             Done
         </button>
         <hr />

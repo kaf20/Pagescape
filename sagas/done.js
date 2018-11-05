@@ -5,5 +5,5 @@ function* doItNow() {
 }
 
 export function* done() {
-    yield takeEvery('DONE', doItNow)
+    yield takeEvery('SGA_DONE', doItNow)
 }
