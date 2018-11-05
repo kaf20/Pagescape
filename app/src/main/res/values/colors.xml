@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorAccent">#D81B60</color>
-
-    <color name="section_background_color">#ffffff</color>
-    <color name="bottom_border_color">#fdfdfd</color>
-    <color name="bottom_border_content_color">#e6e6e6</color>
-    <color name="header_content">#ffc936</color>
-</resources>
