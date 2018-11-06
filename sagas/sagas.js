@@ -5,7 +5,7 @@ import {done} from './done'
 
 function* incrementAsync() {
     yield delay(1000)
-    yield put({type: 'RDR_INCREMENT'})
+    yield put({type: 'RDX_INCREMENT'})
 }
 
 function* watchIncrementAsync() {

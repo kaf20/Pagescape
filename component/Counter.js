@@ -6,11 +6,11 @@ const Counter = ({dispatch, state}) =>
             Increment after 1 second
         </button>
         {' '}
-        <button onClick={() => dispatch('RDR_INCREMENT')}>
+        <button onClick={() => dispatch('RDX_INCREMENT')}>
             Increment
         </button>
         {' '}
-        <button onClick={() => dispatch('RDR_DECREMENT')}>
+        <button onClick={() => dispatch('RDX_DECREMENT')}>
             Decrement
         </button>
         {' '}
