@@ -1,5 +1,25 @@
-import React, {PropTypes} from 'react'
-import ReactTable from 'react-table';
+import React from 'react'
+import PropTypes from 'prop-types'
+import "react-table/react-table.css";
+import Grid from '@material-ui/core/Grid';
+import {Paper, withStyles} from "@material-ui/core";
+import ReactTable from "react-table";
+
+const styles = theme => ({
+    content: {
+        flexGrow: 1,
+        paddingTop: theme.spacing.unit * 10,
+        paddingLeft: theme.spacing.unit * 30,
+        height: '100vh',
+        overflow: 'auto',
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+    appBarSpacer: theme.mixins.toolbar
+})
 
 const range = len => {
     const arr = [];
@@ -24,11 +44,13 @@ const newPerson = () => {
     };
 };
 
+// TODO
+
 const makeData = (len) => {
     return range(len).map(d => {
         return {
             ...newPerson(),
-            children: range(10).map(newPerson)
+            children: range(20).map(newPerson)
         };
     });
 }
@@ -74,28 +96,30 @@ const columns = [
     }
 ]
 
-const tableStyle = {
-    backgroundImage: 'url(\'https://upload.wikimedia.org/wikipedia/commons/7/70/Solid_white.svg\')',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover'
+const Home = (props) => {
+    const {classes, dispatch, state} = props
+    return (
+        <main className={classes.content}>
+            <Grid container spacing={24}>
+                <Grid item xs={3}>{' '}</Grid>
+                <Grid item xs={6}>
+                    <Paper className={classes.paper}>
+                        <ReactTable
+                            data={data}
+                            columns={columns}
+                            defaultPageSize={20}
+                            className='-striped -highlight'/>
+                    </Paper>
+                </Grid>
+                <Grid item xs={3}>{' '}</Grid>
+            </Grid>
+        </main>
+    )
 }
-
-const Home = ({dispatch, state}) =>
-    <div className='mdl-grid'>
-        <div className='mdl-cell mdl-cell--3-col'/>
-        <div className='mdl-cell mdl-cell--6-col' style={tableStyle}>
-            <ReactTable
-                data={data}
-                columns={columns}
-                defaultPageSize={10}
-                className='-striped -highlight'/>
-        </div>
-        <div className='mdl-cell mdl-cell--3-col'/>
-    </div>
 
 Home.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    state: PropTypes.number.isRequired
+    state: PropTypes.object.isRequired
 }
 
-export default Home
+export default withStyles(styles)(Home);
