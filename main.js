@@ -2,12 +2,14 @@ import "babel-polyfill"
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import createSagaMiddleware from 'redux-saga'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 
-import Counter from './Counter'
 import reducer from './reducer/reducer'
-import { rootSaga } from './sagas/sagas'
+import {rootSaga} from './sagas/sagas'
+import Counter from './component/Counter'
+import ErrorPage from './component/ErrorPage'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
@@ -20,9 +22,18 @@ const dispatch = type => store.dispatch({type})
 
 function render() {
     ReactDOM.render(
-        <Counter
-            dispatch={dispatch}
-            state={store.getState()} />,
+        <BrowserRouter>
+            <div>
+                <Switch>
+                    <Route exact path="/" render={() => <Redirect to="/counter"/>}/>
+                    <Route path="/counter" render={() => (
+                        <Counter dispatch={dispatch} state={store.getState()}/>
+                    )}/>
+                    <Route path="/error" component={ErrorPage}/>
+                    <Redirect to="/error"/>
+                </Switch>
+            </div>
+        </BrowserRouter>,
         document.getElementById('root')
     )
 }
