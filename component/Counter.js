@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import {Link} from 'react-router-dom';
 
 const Counter = ({dispatch, state}) =>
     <div>
@@ -17,6 +18,8 @@ const Counter = ({dispatch, state}) =>
         <button onClick={() => dispatch('SGA_DONE')}>
             Done
         </button>
+        {' '}
+        <Link to='/error'>Error</Link>
         <hr />
         <div>
             Clicked: {state} times
