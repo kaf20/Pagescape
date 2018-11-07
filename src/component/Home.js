@@ -4,6 +4,7 @@ import "react-table/react-table.css"
 import Grid from '@material-ui/core/Grid'
 import {Paper, withStyles} from "@material-ui/core"
 import ReactTable from "react-table"
+import axios from "axios";
 
 const styles = theme => ({
     content: {
@@ -32,11 +33,11 @@ const range = len => {
 const newPerson = () => {
     const statusChance = Math.random()
     return {
-        firstName: 'Eight',
-        lastName: 'Chan',
-        age: Math.floor(Math.random() * 30),
+        shopName: 'Eight',
+        noteLong: .9,
+        noteShort: Math.random().toPrecision(4),
+        distance: Math.random().toPrecision(4),
         visits: Math.floor(Math.random() * 100),
-        progress: Math.floor(Math.random() * 100),
         status:
             statusChance > 0.66
                 ? 'relationship'
@@ -55,43 +56,33 @@ const makeData = (len) => {
     })
 }
 
-const data = makeData(5553)
+// const data = makeData(5553)
+// const data = []
+// http://localhost:3000/data.json
 
 const columns = [
     {
-        Header: 'Name',
+        Header: 'CNY',
         columns: [
             {
-                Header: 'First Name',
-                accessor: 'firstName'
+                Header: 'Shop',
+                accessor: 'shopName'
             },
             {
-                Header: 'Last Name',
-                id: 'lastName',
-                accessor: d => d.lastName
-            }
-        ]
-    },
-    {
-        Header: 'Info',
-        columns: [
-            {
-                Header: 'Age',
-                accessor: 'age'
+                Header: 'Note Long',
+                id: 'noteLong',
+                accessor: d => d.noteLong
             },
             {
-                Header: 'Status',
-                accessor: 'status'
-            }
-        ]
-    },
-    {
-        Header: 'Stats',
-        columns: [
+                Header: 'Note Short',
+                id: 'noteShort',
+                accessor: d => d.noteShort
+            },
             {
-                Header: 'Visits',
-                accessor: 'visits'
-            }
+                Header: 'Distance (KM)',
+                id: 'distance',
+                accessor: d => d.distance
+            },
         ]
     }
 ]
@@ -101,14 +92,23 @@ const Home = (props) => {
     return (
         <main className={classes.content}>
             <Grid container spacing={24}>
-                <Grid item xs={3}>{' '}</Grid>
+                <Grid item xs={3}>state {JSON.stringify(state)}</Grid>
                 <Grid item xs={6}>
                     <Paper className={classes.paper}>
                         <ReactTable
-                            data={data}
+                            data={state.rates}
+                            pages={state.pages}
                             columns={columns}
+                            onFetchData={() => dispatch('SGA_RETRIEVE_RATES')}
                             defaultPageSize={20}
-                            className='-striped -highlight'/>
+                            className='-striped -highlight'
+                            defaultSorted={[
+                                {
+                                    id: "noteShort",
+                                    desc: false
+                                }
+                            ]}
+                        />
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>{' '}</Grid>
@@ -118,6 +118,7 @@ const Home = (props) => {
 }
 
 Home.propTypes = {
+    classes: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     state: PropTypes.object.isRequired
 }
