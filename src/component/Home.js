@@ -4,7 +4,6 @@ import "react-table/react-table.css"
 import Grid from '@material-ui/core/Grid'
 import {Paper, withStyles} from "@material-ui/core"
 import ReactTable from "react-table"
-import axios from "axios";
 
 const styles = theme => ({
     content: {
@@ -21,44 +20,6 @@ const styles = theme => ({
     },
     appBarSpacer: theme.mixins.toolbar
 })
-
-const range = len => {
-    const arr = []
-    for (let i = 0; i < len; i++) {
-        arr.push(i)
-    }
-    return arr
-}
-
-const newPerson = () => {
-    const statusChance = Math.random()
-    return {
-        shopName: 'Eight',
-        noteLong: .9,
-        noteShort: Math.random().toPrecision(4),
-        distance: Math.random().toPrecision(4),
-        visits: Math.floor(Math.random() * 100),
-        status:
-            statusChance > 0.66
-                ? 'relationship'
-                : statusChance > 0.33 ? 'complicated' : 'single'
-    }
-}
-
-// TODO
-
-const makeData = (len) => {
-    return range(len).map(d => {
-        return {
-            ...newPerson(),
-            children: range(20).map(newPerson)
-        }
-    })
-}
-
-// const data = makeData(5553)
-// const data = []
-// http://localhost:3000/data.json
 
 const columns = [
     {
@@ -89,6 +50,8 @@ const columns = [
 
 const Home = (props) => {
     const {classes, dispatch, state} = props
+    const {pages, rates} = state.retrieveRatesReducer
+    const handleFetchData = () => dispatch('SGA_RETRIEVE_RATES')
     return (
         <main className={classes.content}>
             <Grid container>
@@ -96,10 +59,10 @@ const Home = (props) => {
                 <Grid item lg={6} sm={12}>
                     <Paper className={classes.paper}>
                         <ReactTable
-                            data={state.retrieveRatesReducer.rates}
-                            pages={state.pages}
+                            data={rates}
+                            pages={pages}
                             columns={columns}
-                            onFetchData={() => dispatch('SGA_RETRIEVE_RATES')}
+                            onFetchData={handleFetchData}
                             defaultPageSize={20}
                             className='-striped -highlight'
                             defaultSorted={[
@@ -123,4 +86,4 @@ Home.propTypes = {
     state: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Home)
+export default withStyles(styles, {withTheme: true})(Home)
