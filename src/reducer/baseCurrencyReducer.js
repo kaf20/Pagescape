@@ -1,10 +1,7 @@
 export default function baseCurrencyReducer(state = {
     baseCurrency: 'hkd',
     baseCurrencyList: [
-        'HKD',
-        'USD',
-        'CNY',
-        'JPY'
+        'HKD'
     ]
 }, action) {
     switch (action.type) {
