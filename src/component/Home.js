@@ -23,14 +23,17 @@ const styles = theme => ({
 
 const Home = (props) => {
     const {classes, dispatch, state} = props
-    const {pages, rates} = state.retrieveRatesReducer
+    const {pages, rates, loading} = state.retrieveRatesReducer
     const {baseCurrency, baseCurrencyList, alternateCurrency, alternateCurrencyList} = state.baseCurrencyReducer
 
     const columns = [{
         Header: baseCurrency + alternateCurrency,
         columns: [{
             Header: 'Shop',
-            accessor: 'shopName'
+            accessor: 'shopName',
+            filterMethod: (filter, row) =>
+                row[filter.id].startsWith(filter.value) &&
+                row[filter.id].endsWith(filter.value)
         }, {
             Header: 'Note Long',
             id: 'noteLong',
@@ -58,6 +61,8 @@ const Home = (props) => {
                             pages={pages}
                             columns={columns}
                             onFetchData={handleFetchData}
+                            loading={loading}
+                            filterable
                             defaultPageSize={20}
                             className='-striped -highlight'
                             defaultSorted={[
