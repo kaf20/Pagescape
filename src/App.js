@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 import {applyMiddleware, createStore} from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom"
 
-import './App.css';
+import './App.css'
 import reducer from './reducer/reducer'
 import {rootSaga} from './sagas/sagas'
 import Home from './component/Home'
 import ErrorPage from './component/common/ErrorPage'
-import Header from "./component/common/Header";
+import Header from "./component/common/Header"
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
@@ -33,8 +33,8 @@ class App extends Component {
                     </Switch>
                 </div>
             </BrowserRouter>
-        );
+        )
     }
 }
 
-export default App;
+export default App

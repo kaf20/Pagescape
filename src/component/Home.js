@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import "react-table/react-table.css";
-import Grid from '@material-ui/core/Grid';
-import {Paper, withStyles} from "@material-ui/core";
-import ReactTable from "react-table";
+import "react-table/react-table.css"
+import Grid from '@material-ui/core/Grid'
+import {Paper, withStyles} from "@material-ui/core"
+import ReactTable from "react-table"
 
 const styles = theme => ({
     content: {
@@ -22,15 +22,15 @@ const styles = theme => ({
 })
 
 const range = len => {
-    const arr = [];
+    const arr = []
     for (let i = 0; i < len; i++) {
-        arr.push(i);
+        arr.push(i)
     }
-    return arr;
-};
+    return arr
+}
 
 const newPerson = () => {
-    const statusChance = Math.random();
+    const statusChance = Math.random()
     return {
         firstName: 'Eight',
         lastName: 'Chan',
@@ -41,8 +41,8 @@ const newPerson = () => {
             statusChance > 0.66
                 ? 'relationship'
                 : statusChance > 0.33 ? 'complicated' : 'single'
-    };
-};
+    }
+}
 
 // TODO
 
@@ -51,8 +51,8 @@ const makeData = (len) => {
         return {
             ...newPerson(),
             children: range(20).map(newPerson)
-        };
-    });
+        }
+    })
 }
 
 const data = makeData(5553)
@@ -122,4 +122,4 @@ Home.propTypes = {
     state: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Home)
