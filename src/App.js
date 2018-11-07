@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 
 const App = (props) => {
     const {store} = props
-    const dispatch = type => store.dispatch({type})
+    const dispatch = (type, payload) => store.dispatch({type, payload})
     return (
         <BrowserRouter>
             <div className='App'>

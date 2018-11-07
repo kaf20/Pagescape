@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import "react-table/react-table.css"
+import 'react-table/react-table.css'
 import Grid from '@material-ui/core/Grid'
-import {Paper, withStyles} from "@material-ui/core"
-import ReactTable from "react-table"
+import {Paper, withStyles} from '@material-ui/core'
+import ReactTable from 'react-table'
 
 const styles = theme => ({
     content: {
@@ -67,7 +67,7 @@ const Home = (props) => {
                             className='-striped -highlight'
                             defaultSorted={[
                                 {
-                                    id: "noteShort",
+                                    id: 'noteShort',
                                     desc: false
                                 }
                             ]}
