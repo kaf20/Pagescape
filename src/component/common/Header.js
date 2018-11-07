@@ -5,9 +5,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
 import Drawer from '@material-ui/core/Drawer'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import List from '@material-ui/core/List'
@@ -17,25 +14,37 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
+import classNames from 'classnames'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 const drawerWidth = 240
+
 const styles = theme => ({
     root: {
-        flexGrow: 1,
-        display: 'flex'
-    },
-    grow: {
-        flexGrow: 1,
-    },
-    menuButtonHidden: {
-        display: 'none',
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
+        display: 'flex',
     },
     appBar: {
-        zIndex: theme.zIndex.drawer + 1,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    appBarShift: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    menuButton: {
+        marginLeft: 12,
+        marginRight: 20,
+    },
+    hide: {
+        display: 'none',
     },
     drawer: {
         width: drawerWidth,
@@ -43,72 +52,74 @@ const styles = theme => ({
     },
     drawerPaper: {
         width: drawerWidth,
-        paddingRight: 24, // keep right padding when drawer closed
+    },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
+        justifyContent: 'flex-end',
     },
     content: {
         flexGrow: 1,
         padding: theme.spacing.unit * 3,
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: -drawerWidth,
     },
-    toolbar: theme.mixins.toolbar
+    contentShift: {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+    },
 })
 
 const Header = (props) => {
-    const {classes, dispatch, state, title} = props
-    const open = Boolean(state.anchorEl)
-    const handleMenu = () => {
-        console.debug("TODO") // TODO
-    }
-    const handleClose = () => {
-        console.debug("TODO") // TODO
-    }
+    const {classes, dispatch, state, theme} = props
+    const {drawerOpen} = state.toggleDrawerOpenReducer
+    const handleToggleDrawerOpen = () => dispatch('RDX_TOGGLE_DRAWER_OPEN')
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" color="inherit" className={classes.grow} align='center'>
-                        <img src='https://hk.ttrate.com/img/logos/cur_cny.png?v=1536485358' height="32" width="42"/>
-                        {title}
+            <AppBar
+                position='fixed'
+                className={classNames(classes.appBar, {
+                    [classes.appBarShift]: drawerOpen,
+                })}
+            >
+                <Toolbar disableGutters={!drawerOpen}>
+                    <IconButton
+                        color='inherit'
+                        aria-label='Open drawer'
+                        onClick={handleToggleDrawerOpen}
+                        className={classNames(classes.menuButton, drawerOpen && classes.hide)}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant='h6' color='inherit' noWrap>
+                        Persistent drawer
                     </Typography>
-                    {state.auth && (
-                        <div>
-                            <IconButton
-                                aria-owns={open ? 'menu-appbar' : undefined}
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={state.anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
                 </Toolbar>
             </AppBar>
             <Drawer
                 className={classes.drawer}
-                variant="permanent"
+                variant='persistent'
+                anchor='left'
+                open={drawerOpen}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
             >
-                <div className={classes.toolbar} />
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleToggleDrawerOpen}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
                 <List>
                     {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                         <ListItem button key={text}>
@@ -135,7 +146,7 @@ Header.propTypes = {
     classes: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     state: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired
+    theme: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Header)
+export default withStyles(styles, {withTheme: true})(Header)
