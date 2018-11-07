@@ -1,4 +1,5 @@
 export default function retrieveRatesReducer(state = {
+    pages: undefined,
     rates: []
 }, action) {
     switch (action.type) {
