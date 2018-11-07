@@ -21,36 +21,31 @@ const styles = theme => ({
     appBarSpacer: theme.mixins.toolbar
 })
 
-const columns = [
-    {
-        Header: 'CNY',
-        columns: [
-            {
-                Header: 'Shop',
-                accessor: 'shopName'
-            },
-            {
-                Header: 'Note Long',
-                id: 'noteLong',
-                accessor: d => d.noteLong
-            },
-            {
-                Header: 'Note Short',
-                id: 'noteShort',
-                accessor: d => d.noteShort
-            },
-            {
-                Header: 'Distance (KM)',
-                id: 'distance',
-                accessor: d => d.distance
-            },
-        ]
-    }
-]
-
 const Home = (props) => {
     const {classes, dispatch, state} = props
     const {pages, rates} = state.retrieveRatesReducer
+    const {baseCurrency, baseCurrencyList, alternateCurrency, alternateCurrencyList} = state.baseCurrencyReducer
+
+    const columns = [{
+        Header: baseCurrency + alternateCurrency,
+        columns: [{
+            Header: 'Shop',
+            accessor: 'shopName'
+        }, {
+            Header: 'Note Long',
+            id: 'noteLong',
+            accessor: d => d.noteLong
+        }, {
+            Header: 'Note Short',
+            id: 'noteShort',
+            accessor: d => d.noteShort
+        }, {
+            Header: 'Distance (KM)',
+            id: 'distance',
+            accessor: d => d.distance
+        }]
+        }]
+
     const handleFetchData = () => dispatch('SGA_RETRIEVE_RATES')
     return (
         <main className={classes.content}>

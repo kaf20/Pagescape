@@ -87,12 +87,17 @@ const styles = theme => ({
 const Header = (props) => {
     const {classes, dispatch, state, theme} = props
     const {drawerOpen} = state.toggleDrawerOpenReducer
-    const {baseCurrency, baseCurrencyList} = state.baseCurrencyReducer
-    const currencyMenuItems = []
+    const {baseCurrency, baseCurrencyList, alternateCurrency, alternateCurrencyList} = state.baseCurrencyReducer
+    const baseCurrencyMenuItems = []
+    const alternateCurrencyMenuItems = []
     for (const i in baseCurrencyList)
-        currencyMenuItems.push(<MenuItem key={`currencyMenuItem-${i}`} value={baseCurrencyList[i]}>{baseCurrencyList[i].toUpperCase()}</MenuItem>)
+        baseCurrencyMenuItems.push(<MenuItem key={`currencyMenuItem-${i}`} value={baseCurrencyList[i]}>{baseCurrencyList[i].toUpperCase()}</MenuItem>)
+    for (const i in alternateCurrencyList)
+        alternateCurrencyMenuItems.push(<MenuItem key={`currencyMenuItem-${i}`} value={alternateCurrencyList[i]}>{alternateCurrencyList[i].toUpperCase()}</MenuItem>)
+
     const handleToggleDrawerOpen = event => dispatch('RDX_TOGGLE_DRAWER_OPEN')
     const handleBaseCurrencyChange = event => dispatch('RDX_CHANGE_BASE_CURRENCY', event.target.value)
+    const handleAlternateCurrencyChange = event => dispatch('RDX_CHANGE_ALTERNATE_CURRENCY', event.target.value)
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -140,7 +145,19 @@ const Header = (props) => {
                         renderValue={value => `⚠️  - ${value.toUpperCase()}`}
                         input={<Input id='name-error' />}
                     >
-                        {currencyMenuItems}
+                        {baseCurrencyMenuItems}
+                    </Select>
+                </FormControl>
+                <FormControl className={classes.formControl} error>
+                    <InputLabel htmlFor='name-error'>兌換</InputLabel>
+                    <Select
+                        value={alternateCurrency}
+                        onChange={handleAlternateCurrencyChange}
+                        name='name'
+                        renderValue={value => `⚠️  - ${value.toUpperCase()}`}
+                        input={<Input id='name-error' />}
+                    >
+                        {alternateCurrencyMenuItems}
                     </Select>
                 </FormControl>
             </Drawer>
