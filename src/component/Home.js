@@ -91,9 +91,9 @@ const Home = (props) => {
     const {classes, dispatch, state} = props
     return (
         <main className={classes.content}>
-            <Grid container spacing={24}>
-                <Grid item xs={3}>{' '}</Grid>
-                <Grid item xs={6}>
+            <Grid container>
+                <Grid item lg={3}>{' '}</Grid>
+                <Grid item lg={6} sm={12}>
                     <Paper className={classes.paper}>
                         <ReactTable
                             data={state.retrieveRatesReducer.rates}
@@ -111,7 +111,7 @@ const Home = (props) => {
                         />
                     </Paper>
                 </Grid>
-                <Grid item xs={3}>{' '}</Grid>
+                <Grid item lg={3}>{' '}</Grid>
             </Grid>
         </main>
     )
