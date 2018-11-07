@@ -44,7 +44,7 @@ const Home = (props) => {
             id: 'distance',
             accessor: d => d.distance
         }]
-        }]
+    }]
 
     const handleFetchData = () => dispatch('SGA_RETRIEVE_RATES')
     return (
