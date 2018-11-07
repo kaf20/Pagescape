@@ -92,11 +92,11 @@ const Home = (props) => {
     return (
         <main className={classes.content}>
             <Grid container spacing={24}>
-                <Grid item xs={3}>state {JSON.stringify(state)}</Grid>
+                <Grid item xs={3}>{' '}</Grid>
                 <Grid item xs={6}>
                     <Paper className={classes.paper}>
                         <ReactTable
-                            data={state.rates}
+                            data={state.retrieveRatesReducer.rates}
                             pages={state.pages}
                             columns={columns}
                             onFetchData={() => dispatch('SGA_RETRIEVE_RATES')}
