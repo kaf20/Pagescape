@@ -1,7 +1,7 @@
-import {call, put, takeEvery} from 'redux-saga/effects'
+import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
 
-function* doRetrieveRates() {
+function* doRetrieveRates(payload) {
     try {
         const api = () =>
             axios.get('/data.json', {
@@ -16,6 +16,6 @@ function* doRetrieveRates() {
     }
 }
 
-export function* retrieveRates() {
-    yield takeEvery('SGA_RETRIEVE_RATES', doRetrieveRates)
+export function* retrieveRatesSaga() {
+    yield takeLatest('SGA_RETRIEVE_RATES', doRetrieveRates)
 }
