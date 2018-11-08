@@ -62,6 +62,8 @@ const Home = (props) => {
             })
         else
             dispatch('SGA_RETRIEVE_RATES')
+
+        dispatch('SGA_RETRIEVE_ALTERNATE_CURRENCY_LIST')
     }
     return (
         <main className={classes.content}>

@@ -95,9 +95,24 @@ const Header = (props) => {
     for (const i in alternateCurrencyList)
         alternateCurrencyMenuItems.push(<MenuItem key={`currencyMenuItem-${i}`} value={alternateCurrencyList[i]}>{alternateCurrencyList[i].toUpperCase()}</MenuItem>)
 
-    const handleToggleDrawerOpen = event => dispatch('RDX_TOGGLE_DRAWER_OPEN')
+    const handleToggleDrawerOpen = event => dispatch('RDX_TOGGLE_DRAWER_OPEN', event.target.value)
     const handleBaseCurrencyChange = event => dispatch('RDX_CHANGE_BASE_CURRENCY', event.target.value)
     const handleAlternateCurrencyChange = event => dispatch('RDX_CHANGE_ALTERNATE_CURRENCY', event.target.value)
+
+    const selectAlternateCurrencyOption = alternateCurrency &&
+        <FormControl className={classes.formControl} error>
+            <InputLabel htmlFor='name-error'>兌換</InputLabel>
+            <Select
+                value={alternateCurrency}
+                onChange={handleAlternateCurrencyChange}
+                name='name'
+                renderValue={value => `⚠️  - ${value.toUpperCase()}`}
+                input={<Input id='name-error' />}
+            >
+                {alternateCurrencyMenuItems}
+            </Select>
+        </FormControl>
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -148,18 +163,7 @@ const Header = (props) => {
                         {baseCurrencyMenuItems}
                     </Select>
                 </FormControl>
-                <FormControl className={classes.formControl} error>
-                    <InputLabel htmlFor='name-error'>兌換</InputLabel>
-                    <Select
-                        value={alternateCurrency}
-                        onChange={handleAlternateCurrencyChange}
-                        name='name'
-                        renderValue={value => `⚠️  - ${value.toUpperCase()}`}
-                        input={<Input id='name-error' />}
-                    >
-                        {alternateCurrencyMenuItems}
-                    </Select>
-                </FormControl>
+                {selectAlternateCurrencyOption}
             </Drawer>
         </div>
     )
