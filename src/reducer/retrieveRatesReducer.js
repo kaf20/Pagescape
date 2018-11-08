@@ -6,6 +6,7 @@ export default function retrieveRatesReducer(state = {
     switch (action.type) {
         case 'RDX_RETRIEVE_RATES_SUCCESS':
             return Object.assign({}, state, {rates: action.payload, loading: false})
+        case 'RDX_RETRIEVE_RATES_FAIL':
         default:
             return state
     }
