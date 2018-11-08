@@ -26,14 +26,14 @@ const Home = (props) => {
     const {baseCurrency, baseCurrencyList, alternateCurrency, alternateCurrencyList} = state.baseCurrencyReducer
 
     const columnsData = [{
-        Header: 'Shop',
+        Header: '商戶',
         accessor: 'shopName'
     }, {
-        Header: 'Note Long',
+        Header: '現鈔商戶買入',
         id: 'noteLong',
         accessor: d => d.noteLong
     }, {
-        Header: 'Note Short',
+        Header: '現鈔商戶賣出',
         id: 'noteShort',
         accessor: d => d.noteShort
     }]
@@ -45,7 +45,7 @@ const Home = (props) => {
 
     if ("geolocation" in navigator)
         columnsData.push({
-            Header: 'Distance (KM)',
+            Header: '距離 (km)',
             id: 'distance',
             accessor: d => d.distance
         })
