@@ -25,30 +25,44 @@ const Home = (props) => {
     const {pages, rates, loading} = state.retrieveRatesReducer
     const {baseCurrency, baseCurrencyList, alternateCurrency, alternateCurrencyList} = state.baseCurrencyReducer
 
-    const columns = [{
-        Header: baseCurrency + alternateCurrency,
-        columns: [{
-            Header: 'Shop',
-            accessor: 'shopName',
-            filterMethod: (filter, row) =>
-                row[filter.id].startsWith(filter.value) &&
-                row[filter.id].endsWith(filter.value)
-        }, {
-            Header: 'Note Long',
-            id: 'noteLong',
-            accessor: d => d.noteLong
-        }, {
-            Header: 'Note Short',
-            id: 'noteShort',
-            accessor: d => d.noteShort
-        }, {
+    const columnsData = [{
+        Header: 'Shop',
+        accessor: 'shopName'
+    }, {
+        Header: 'Note Long',
+        id: 'noteLong',
+        accessor: d => d.noteLong
+    }, {
+        Header: 'Note Short',
+        id: 'noteShort',
+        accessor: d => d.noteShort
+    }]
+
+    const defaultSorted = [{
+        id: 'noteShort',
+        desc: false
+    }]
+
+    if ("geolocation" in navigator)
+        columnsData.push({
             Header: 'Distance (KM)',
             id: 'distance',
             accessor: d => d.distance
-        }]
+        })
+
+    const columns = [{
+        Header: baseCurrency + alternateCurrency,
+        columns: columnsData
     }]
 
-    const handleFetchData = () => dispatch('SGA_RETRIEVE_RATES')
+    const handleFetchData = () => {
+        if ("geolocation" in navigator)
+            navigator.geolocation.getCurrentPosition(function(position) {
+                dispatch('SGA_RETRIEVE_RATES', {position: position})
+            })
+        else
+            dispatch('SGA_RETRIEVE_RATES')
+    }
     return (
         <main className={classes.content}>
             <Grid container>
@@ -61,15 +75,9 @@ const Home = (props) => {
                             columns={columns}
                             onFetchData={handleFetchData}
                             loading={loading}
-                            filterable
                             defaultPageSize={20}
                             className='-striped -highlight'
-                            defaultSorted={[
-                                {
-                                    id: 'noteShort',
-                                    desc: false
-                                }
-                            ]}
+                            defaultSorted={defaultSorted}
                         />
                     </Paper>
                 </Grid>
