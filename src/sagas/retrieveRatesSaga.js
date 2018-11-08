@@ -20,10 +20,10 @@ const haversine = (latitude, longitude, coordinates) => {
     return earthRadius * c // metres
 }
 
-function* doRetrieveRates(action) {
+function* doRetrieve(action) {
     try {
         const api = () =>
-            axios.get('/data.json', {
+            axios.get('/data/rates.json', {
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -43,5 +43,5 @@ function* doRetrieveRates(action) {
 }
 
 export function* retrieveRatesSaga() {
-    yield takeLatest('SGA_RETRIEVE_RATES', doRetrieveRates)
+    yield takeLatest('SGA_RETRIEVE_RATES', doRetrieve)
 }
