@@ -1,10 +1,10 @@
 {
-  "name": "ttcalc",
+  "name": "ttcalc-ui",
   "version": "0.1.0",
   "description": "Exchange Rate Tracker",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaf20/ttcalc.git"
+    "url": "git+https://github.com/kaf20/ttcalc-ui.git"
   },
   "author": "Nelson Lau <nelson.kf.lau@gmail.com>",
   "dependencies": {
