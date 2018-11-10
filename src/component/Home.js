@@ -27,7 +27,7 @@ const Home = (props) => {
 
     const columnsData = [{
         Header: '商戶',
-        accessor: 'shopName'
+        accessor: 'shop'
     }, {
         Header: '現鈔商戶買入',
         id: 'noteLong',
