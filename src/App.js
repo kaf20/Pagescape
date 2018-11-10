@@ -6,6 +6,7 @@ import Home from './component/Home'
 import ErrorPage from './component/common/ErrorPage'
 import Header from './component/common/Header'
 import PropTypes from 'prop-types'
+import './AxiosConfig'
 
 const App = (props) => {
     const {store} = props
