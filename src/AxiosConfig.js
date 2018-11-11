@@ -1,5 +1,8 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://pric.me/ttcalc-web'
+let domain = 'http://localhost'
+if (process.env.NODE_ENV === 'production')
+    domain = 'https://pric.me'
+axios.defaults.baseURL = `${domain}/ttcalc-web`
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
 axios.defaults.headers.post['Content-Type'] = 'application/json'
