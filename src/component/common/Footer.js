@@ -10,11 +10,20 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
+        backgroundColor: '#313131'
     },
     footerItem: {
         display: 'inline-block',
-        padding: '3px 5px'
-    }
+        padding: '3px 5px',
+        fontSize: 'small',
+    },
+    disclaimer: {
+        fontSize: 'x-small',
+        color: '#fff',
+    },
+    linkItem: {
+        color: '#fff',
+    },
 })
 
 const Footer = (props) => {
@@ -24,30 +33,30 @@ const Footer = (props) => {
             <Typography variant="h5" component="h3">
                 <ul>
                     <li className={classes.footerItem}>
-                        <a href="/#">關於我們</a>
+                        <a href="/#" className={classes.linkItem}>關於我們</a>
                     </li>
                     <li className={classes.footerItem}>|</li>
                     <li className={classes.footerItem}>
-                        <a href="/#">聯絡我們</a>
+                        <a href="/#" className={classes.linkItem}>聯絡我們</a>
                     </li>
                     <li className={classes.footerItem}>|</li>
                     <li className={classes.footerItem}>
-                        <a href="/#">私隱政策</a>
+                        <a href="/#" className={classes.linkItem}>私隱政策</a>
                     </li>
                     <li className={classes.footerItem}>|</li>
                     <li className={classes.footerItem}>
-                        <a href="/#">服務條款</a>
+                        <a href="/#" className={classes.linkItem}>服務條款</a>
                     </li>
                     <li className={classes.footerItem}>|</li>
                     <li className={classes.footerItem}>
-                        <a href="/#">免責聲明</a>
+                        <a href="/#" className={classes.linkItem}>免責聲明</a>
                     </li>
                 </ul>
             </Typography>
-            <Typography component="p">
+            <Typography component="p" className={classes.disclaimer}>
                 所有資料只供參考用途及並不代表TTRate.com或任何人仕的提議、合約、或保證。請向有關銀行或機構查詢實際匯率。
             </Typography>
-            <Typography component="p">
+            <Typography component="p" className={classes.disclaimer}>
                 Copyright © 2018 pric.me
             </Typography>
         </Paper>
