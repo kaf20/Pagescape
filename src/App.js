@@ -7,6 +7,7 @@ import ErrorPage from './component/common/ErrorPage'
 import Header from './component/common/Header'
 import PropTypes from 'prop-types'
 import './AxiosConfig'
+import Footer from "./component/common/Footer";
 
 const App = (props) => {
     const {store} = props
@@ -14,13 +15,14 @@ const App = (props) => {
     return (
         <BrowserRouter>
             <div className='App'>
-                <Header dispatch={dispatch} state={store.getState()} title='人民幣兌港元 (CNY vs HKD)'/>
+                <Header dispatch={dispatch} state={store.getState()}/>
                 <Switch>
                     <Route exact path='/' render={() => (
                         <Home dispatch={dispatch} state={store.getState()}/>
                     )}/>
                     <Route component={ErrorPage}/>
                 </Switch>
+                <Footer dispatch={dispatch} state={store.getState()}/>
             </div>
         </BrowserRouter>
     )
