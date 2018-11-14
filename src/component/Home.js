@@ -2,8 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import 'react-table/react-table.css'
 import Grid from '@material-ui/core/Grid'
-import {Paper, withStyles} from '@material-ui/core'
-import EnhancedTable from "./EnhancedTable";
+import Card from '@material-ui/core/Card'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import {withStyles} from '@material-ui/core'
+import lifecycle from 'react-pure-lifecycle'
+import {compose} from 'recompose'
 
 const styles = theme => ({
     content: {
@@ -12,77 +20,63 @@ const styles = theme => ({
         height: '100vh',
         overflow: 'auto',
     },
-    paper: {
-        padding: theme.spacing.unit * 2,
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
+    card: {
+        // maxWidth: 445,
     },
-    appBarSpacer: theme.mixins.toolbar
+    media: {
+        height: 140,
+    },
+    action: {
+        textAlign: 'right'
+    },
 })
+
+const methods = {
+    componentDidMount(props) {
+        props.dispatch('SGA_RETRIEVE_PRODUCT')
+    }
+}
 
 const Home = (props) => {
     const {classes, dispatch, state} = props
-    // const {pages, rates, loading} = state.retrieveRatesReducer
-    // const {baseCurrency, baseCurrencyList, alternateCurrency, alternateCurrencyList} = state.baseCurrencyReducer
+    const {products} = state.retrieveProductReducer
 
-    // const columnsData = [{
-    //     Header: '商戶',
-    //     accessor: 'shop'
-    // }, {
-    //     Header: '現鈔商戶買入',
-    //     id: 'noteLong',
-    //     accessor: d => d.noteLong
-    // }, {
-    //     Header: '現鈔商戶賣出',
-    //     id: 'noteShort',
-    //     accessor: d => d.noteShort
-    // }]
-    //
-    // const defaultSorted = [{
-    //     id: 'noteShort',
-    //     desc: false
-    // }]
-    //
-    // if ("geolocation" in navigator)
-    //     columnsData.push({
-    //         Header: '距離 (km)',
-    //         id: 'distance',
-    //         accessor: d => d.distance
-    //     })
-
-    // const columns = [{
-    //     Header: baseCurrency + alternateCurrency,
-    //     columns: columnsData
-    // }]
-    //
-    // const handleFetchData = () => {
-    //     if ("geolocation" in navigator)
-    //         navigator.geolocation.getCurrentPosition(function(position) {
-    //             dispatch('SGA_RETRIEVE_RATES', {position: position})
-    //         })
-    //     else
-    //         dispatch('SGA_RETRIEVE_RATES')
-    //
-    //     dispatch('SGA_RETRIEVE_ALTERNATE_CURRENCY_LIST')
-    // }
     return (
         <main className={classes.content}>
             <Grid container>
                 <Grid item lg={3}>{' '}</Grid>
                 <Grid item lg={6} sm={12}>
-                    <Paper className={classes.paper}>
-                        {/*<ReactTable*/}
-                            {/*data={rates}*/}
-                            {/*pages={pages}*/}
-                            {/*columns={columns}*/}
-                            {/*onFetchData={handleFetchData}*/}
-                            {/*loading={loading}*/}
-                            {/*defaultPageSize={20}*/}
-                            {/*className='-striped -highlight'*/}
-                            {/*defaultSorted={defaultSorted}*/}
-                        {/*/>*/}
-                        <EnhancedTable dispatch={dispatch} state={state}/>
-                    </Paper>
+                    <Grid container spacing={24}>
+                    {products.map(p =>
+                        <Grid key={p.id} item xs={6}>
+                            <Card className={classes.card}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={classes.media}
+                                        image={p.imageUrl || 'https://material-ui.com/static/images/cards/contemplative-reptile.jpg'}
+                                        title='Contemplative Reptile'
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant='h5' component='h2'>
+                                            {p.name + ' ' + p.price + ' ' + p.place}
+                                        </Typography>
+                                        <Typography component='p'>
+                                            {p.description}
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                                <CardActions className={classes.action}>
+                                    <Button size='small' color='primary'>
+                                        Share
+                                    </Button>
+                                    <Button size='small' color='primary'>
+                                        Learn More
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    )}
+                    </Grid>
                 </Grid>
                 <Grid item lg={3}>{' '}</Grid>
             </Grid>
@@ -96,4 +90,9 @@ Home.propTypes = {
     state: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, {withTheme: true})(Home)
+// export default withStyles(styles, {withTheme: true})(Home)
+// export default lifecycle(methods)(Channels)
+export default compose(
+    withStyles(styles, {withTheme: true}),
+    lifecycle(methods),
+)(Home)
