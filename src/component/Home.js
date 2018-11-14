@@ -54,7 +54,7 @@ const Home = (props) => {
                                     <CardMedia
                                         className={classes.media}
                                         image={p.imageUrl || 'https://material-ui.com/static/images/cards/contemplative-reptile.jpg'}
-                                        title='Contemplative Reptile'
+                                        title='未有圖'
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant='h5' component='h2'>
