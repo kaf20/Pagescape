@@ -8,6 +8,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core'
 import lifecycle from 'react-pure-lifecycle'
@@ -51,11 +52,12 @@ const Home = (props) => {
                         <Grid key={p.id} item xs={6}>
                             <Card className={classes.card}>
                                 <CardActionArea>
-                                    <CardMedia
-                                        className={classes.media}
-                                        image={p.imageUrl || 'https://material-ui.com/static/images/cards/contemplative-reptile.jpg'}
-                                        title='未有圖'
-                                    />
+                                    <Tooltip title="未有圖😲" placement="top">
+                                        <CardMedia
+                                            className={classes.media}
+                                            image={p.imageUrl || 'https://material-ui.com/static/images/cards/contemplative-reptile.jpg'}
+                                        />
+                                    </Tooltip>
                                     <CardContent>
                                         <Typography gutterBottom variant='h5' component='h2'>
                                             {p.name + ' ' + p.price + ' ' + p.place}
