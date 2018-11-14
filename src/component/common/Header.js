@@ -6,37 +6,17 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Drawer from '@material-ui/core/Drawer'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
 import classNames from 'classnames'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
 
 const drawerWidth = 240
 
 const styles = theme => ({
     root: {
         display: 'flex',
-    },
-    appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
     },
     formControl: {
         margin: theme.spacing.unit,
@@ -87,41 +67,11 @@ const styles = theme => ({
 const Header = (props) => {
     const {classes, dispatch, state, theme} = props
     const {drawerOpen} = state.toggleDrawerOpenReducer
-    const {baseCurrency, baseCurrencyList, alternateCurrency, alternateCurrencyList} = state.baseCurrencyReducer
-    const baseCurrencyMenuItems = []
-    const alternateCurrencyMenuItems = []
-    for (const i in baseCurrencyList)
-        baseCurrencyMenuItems.push(<MenuItem key={`currencyMenuItem-${i}`} value={baseCurrencyList[i]}>{baseCurrencyList[i].toUpperCase()}</MenuItem>)
-    for (const i in alternateCurrencyList)
-        alternateCurrencyMenuItems.push(<MenuItem key={`currencyMenuItem-${i}`} value={alternateCurrencyList[i]}>{alternateCurrencyList[i].toUpperCase()}</MenuItem>)
-
     const handleToggleDrawerOpen = event => dispatch('RDX_TOGGLE_DRAWER_OPEN', event.target.value)
-    const handleBaseCurrencyChange = event => dispatch('RDX_CHANGE_BASE_CURRENCY', event.target.value)
-    const handleAlternateCurrencyChange = event => dispatch('RDX_CHANGE_ALTERNATE_CURRENCY', event.target.value)
-
-    const selectAlternateCurrencyOption = alternateCurrency &&
-        <FormControl className={classes.formControl} error>
-            <InputLabel htmlFor='name-error'>兌換</InputLabel>
-            <Select
-                value={alternateCurrency}
-                onChange={handleAlternateCurrencyChange}
-                name='name'
-                renderValue={value => `⚠️  - ${value.toUpperCase()}`}
-                input={<Input id='name-error' />}
-            >
-                {alternateCurrencyMenuItems}
-            </Select>
-        </FormControl>
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-                position='fixed'
-                className={classNames(classes.appBar, {
-                    [classes.appBarShift]: drawerOpen,
-                })}
-            >
+            <AppBar position='fixed'>
                 <Toolbar disableGutters={!drawerOpen}>
                     <IconButton
                         color='inherit'
@@ -132,7 +82,7 @@ const Header = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant='h6' color='inherit' noWrap>
-                        外幣匯率比較
+                        C9 super!!
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -151,19 +101,6 @@ const Header = (props) => {
                     </IconButton>
                 </div>
                 <Divider />
-                <FormControl className={classes.formControl} error>
-                    <InputLabel htmlFor='name-error'>我想比較</InputLabel>
-                    <Select
-                        value={baseCurrency}
-                        onChange={handleBaseCurrencyChange}
-                        name='name'
-                        renderValue={value => `⚠️  - ${value.toUpperCase()}`}
-                        input={<Input id='name-error' />}
-                    >
-                        {baseCurrencyMenuItems}
-                    </Select>
-                </FormControl>
-                {selectAlternateCurrencyOption}
             </Drawer>
         </div>
     )
