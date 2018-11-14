@@ -1,10 +1,8 @@
 import {combineReducers} from 'redux'
-import retrieveRatesReducer from './retrieveRatesReducer'
 import toggleDrawerOpenReducer from './toggleDrawerOpenReducer'
-import baseCurrencyReducer from './baseCurrencyReducer'
+import retrieveProductReducer from './retrieveProductReducer'
 
 export default combineReducers({
-    retrieveRatesReducer,
+    retrieveProductReducer,
     toggleDrawerOpenReducer,
-    baseCurrencyReducer
 })
