@@ -6,20 +6,31 @@ import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import TextField from '@material-ui/core/TextField';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import classNames from 'classnames';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
-
+    textField: {
+        flexBasis: 200,
+    },
 })
 
 const AddProductDialog = (props) => {
     const {classes, dispatch, state, theme} = props
-    const {isAddProductDialogOpen} = state.addProductDialogReducer
+    const {isAddProductDialogOpen, name, price, place} = state.addProductDialogReducer
 
+    const handleTextFieldChange = (event, payload) => dispatch('RDX_PRODUCT_DIALOG_TEXTFIELD_CHANGE', payload)
     const handleToggleProductDialogCancel = event => dispatch('RDX_TOGGLE_PRODUCT_DIALOG_OPEN', {isAddProductDialogOpen: !isAddProductDialogOpen})
-    const handleToggleProductDialogOk = event => dispatch('SGA_TOGGLE_PRODUCT_DIALOG_OPEN', {isAddProductDialogOpen: !isAddProductDialogOpen})
+    const handleToggleProductDialogOk = event => dispatch('SGA_TOGGLE_PRODUCT_DIALOG_OPEN', {
+        isAddProductDialogOpen: !isAddProductDialogOpen,
+        name: name,
+        price: price,
+        place: place,
+    })
     const handleToggleProductDialog = event => dispatch('RDX_TOGGLE_PRODUCT_DIALOG_OPEN', {isAddProductDialogOpen: !isAddProductDialogOpen})
+    const okToSubmit = !!name && !!price && !!place
 
     return (
         <Dialog aria-labelledby='simple-dialog-title'
@@ -32,34 +43,39 @@ const AddProductDialog = (props) => {
                 <DialogContentText>
                     開心 ❤ Share
                 </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="產品"
-                    type="text"
-                    fullWidth
-                />
-                <TextField
-                    margin="dense"
-                    id="place"
-                    label="店舖"
-                    type="text"
-                    fullWidth
-                />
-                <TextField
-                    margin="dense"
-                    id="price"
-                    label="價錢"
-                    type="number"
-                    fullWidth
-                />
+                <FormControl className={classNames(classes.margin, classes.textField)}>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="產品"
+                        type="text"
+                        fullWidth
+                        onChange={(event) => handleTextFieldChange(event, {name: event.target.value})}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="place"
+                        label="店舖"
+                        type="text"
+                        fullWidth
+                        onChange={(event) => handleTextFieldChange(event, {place: event.target.value})}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="price"
+                        label="價錢"
+                        type="number"
+                        fullWidth
+                        onChange={(event) => handleTextFieldChange(event, {price: event.target.value})}
+                    />
+                </FormControl>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleToggleProductDialogCancel} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={handleToggleProductDialogOk} color="primary">
+                <Button onClick={handleToggleProductDialogOk} color="primary" disabled={!okToSubmit}>
                     Ok
                 </Button>
             </DialogActions>
