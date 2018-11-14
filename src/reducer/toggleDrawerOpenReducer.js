@@ -1,5 +1,5 @@
 export default function toggleDrawerOpenReducer(state = {
-    drawerOpen: true
+    drawerOpen: false
 }, action) {
     switch (action.type) {
         case 'RDX_TOGGLE_DRAWER_OPEN':
