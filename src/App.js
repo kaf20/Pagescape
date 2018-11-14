@@ -7,7 +7,8 @@ import ErrorPage from './component/common/ErrorPage'
 import Header from './component/common/Header'
 import PropTypes from 'prop-types'
 import './AxiosConfig'
-import Footer from "./component/common/Footer";
+import CssBaseline from '@material-ui/core/CssBaseline'
+
 
 const App = (props) => {
     const {store} = props
@@ -15,6 +16,7 @@ const App = (props) => {
     return (
         <BrowserRouter>
             <div className='App'>
+                <CssBaseline />
                 <Header dispatch={dispatch} state={store.getState()}/>
                 <Switch>
                     <Route exact path='/' render={() => (
@@ -22,7 +24,6 @@ const App = (props) => {
                     )}/>
                     <Route component={ErrorPage}/>
                 </Switch>
-                <Footer dispatch={dispatch} state={store.getState()}/>
             </div>
         </BrowserRouter>
     )
