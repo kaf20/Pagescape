@@ -4,11 +4,7 @@ import axios from 'axios'
 function* doRetrieve(action) {
     try {
         const api = () =>
-            axios.get('/api/v1/product', {
-                headers: {
-                    'Accept': 'application/json'
-                },
-            })
+            axios.get('/product')
         const result = yield call(api)
         yield put({type: 'RDX_RETRIEVE_PRODUCT_SUCCESS', payload: result.data})
     } catch (error) {

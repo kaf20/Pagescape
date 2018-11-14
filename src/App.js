@@ -8,6 +8,7 @@ import Header from './component/common/Header'
 import PropTypes from 'prop-types'
 import './AxiosConfig'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import ErrorDialog from "./component/common/ErrorDialog";
 
 
 const App = (props) => {
@@ -24,6 +25,7 @@ const App = (props) => {
                     )}/>
                     <Route component={ErrorPage}/>
                 </Switch>
+                <ErrorDialog dispatch={dispatch} state={store.getState()}/>
             </div>
         </BrowserRouter>
     )

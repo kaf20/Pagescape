@@ -23,11 +23,7 @@ const haversine = (latitude, longitude, coordinates) => {
 function* doRetrieve(action) {
     try {
         const api = () =>
-            axios.get('/api/v1/exchangeRate', {
-                headers: {
-                    'Accept': 'application/json'
-                },
-            })
+            axios.get('/api/v1/exchangeRate')
         const result = yield call(api)
         if (action.payload.position)
             result.data.forEach(it => {
