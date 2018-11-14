@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core'
 import lifecycle from 'react-pure-lifecycle'
 import {compose} from 'recompose'
+import CurrencyFormat from 'react-currency-format'
 
 const styles = theme => ({
     content: {
@@ -60,7 +61,9 @@ const Home = (props) => {
                                     </Tooltip>
                                     <CardContent>
                                         <Typography gutterBottom variant='h5' component='h2'>
-                                            {p.name + ' ' + p.price + ' ' + p.place}
+                                            {p.name + ' '}
+                                            <CurrencyFormat value={p.price} displayType={'text'} thousandSeparator={true} decimalScale={2} prefix={'$'}/>
+                                            {' ' + p.place}
                                         </Typography>
                                         <Typography component='p'>
                                             {p.description}
