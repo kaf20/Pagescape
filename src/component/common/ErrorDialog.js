@@ -27,7 +27,6 @@ const ErrorDialog = (props) => {
             <DialogTitle id='simple-dialog-title'>{errorMessage}</DialogTitle>
             <DialogContent>
                 <DialogContentText>{errorMessage}</DialogContentText>
-                {errorMessage}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleToggleErrorDialog} color="primary">
