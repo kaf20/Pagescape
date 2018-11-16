@@ -35,7 +35,12 @@ const styles = theme => ({
 
 const methods = {
     componentDidMount(props) {
-        props.dispatch('SGA_RETRIEVE_PRODUCT')
+        const {classes, dispatch, state} = props
+        dispatch('SGA_RETRIEVE_PRODUCT')
+        if ("geolocation" in navigator)
+            navigator.geolocation.getCurrentPosition(function(position) {
+                dispatch('SGA_RETRIEVE_CURRENT_POSITION', {position: position})
+            })
     }
 }
 
@@ -95,8 +100,6 @@ Home.propTypes = {
     state: PropTypes.object.isRequired
 }
 
-// export default withStyles(styles, {withTheme: true})(Home)
-// export default lifecycle(methods)(Channels)
 export default compose(
     withStyles(styles, {withTheme: true}),
     lifecycle(methods),
