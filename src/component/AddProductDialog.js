@@ -21,15 +21,18 @@ const AddProductDialog = (props) => {
     const {classes, dispatch, state, theme} = props
     const {isAddProductDialogOpen, name, price, place} = state.addProductDialogReducer
     const {position} = state.retrieveCurrentPositionReducer
+    const {products, hasMore, page, size} = state.retrieveProductReducer
 
     const handleTextFieldChange = (event, payload) => dispatch('RDX_PRODUCT_DIALOG_TEXTFIELD_CHANGE', payload)
     const handleToggleProductDialogCancel = event => dispatch('RDX_TOGGLE_PRODUCT_DIALOG_OPEN', {isAddProductDialogOpen: !isAddProductDialogOpen})
-    const handleToggleProductDialogOk = event => dispatch('SGA_TOGGLE_PRODUCT_DIALOG_OPEN', {
+    const handleToggleProductDialogOk = event => dispatch('SGA_PRODUCT_DIALOG_ADD', {
         isAddProductDialogOpen: !isAddProductDialogOpen,
         name: name,
         price: price,
         place: place,
         position: position,
+        page: page,
+        size: size,
     })
     const handleToggleProductDialog = event => dispatch('RDX_TOGGLE_PRODUCT_DIALOG_OPEN', {isAddProductDialogOpen: !isAddProductDialogOpen})
     const okToSubmit = !!name && !!price && !!place
