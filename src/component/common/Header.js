@@ -138,7 +138,7 @@ const Header = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant='h6' color='inherit' noWrap>
-                        C9 super!!
+                        C9 Web 👗
                     </Typography>
                 </Toolbar>
             </AppBar>
