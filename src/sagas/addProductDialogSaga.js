@@ -18,7 +18,9 @@ function* doRetrieve(action) {
         yield put({type: 'RDX_TOGGLE_PRODUCT_DIALOG_OPEN', payload: {
             isAddProductDialogOpen: action.payload.isAddProductDialogOpen
         }})
-        yield put({type: 'SGA_RETRIEVE_PRODUCT'})
+        yield put({type: 'RDX_RETRIEVE_PRODUCT_SUCCESS', payload: {
+                products: [result.data],
+            }})
         yield put({type: 'RDX_TOGGLE_SNACKBAR_OPEN', payload: {
                 isSnackBarDialogOpen: !action.payload.isSnackBarDialogOpen,
                 message: '上架了👍大成功😘'
@@ -32,5 +34,5 @@ function* doRetrieve(action) {
 }
 
 export function* addProductDialogSaga() {
-    yield takeLatest('SGA_TOGGLE_PRODUCT_DIALOG_OPEN', doRetrieve)
+    yield takeLatest('SGA_PRODUCT_DIALOG_ADD', doRetrieve)
 }
