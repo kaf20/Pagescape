@@ -14,6 +14,8 @@ import {withStyles} from '@material-ui/core'
 import lifecycle from 'react-pure-lifecycle'
 import {compose} from 'recompose'
 import CurrencyFormat from 'react-currency-format'
+import InfiniteScroll from 'react-infinite-scroller'
+import classNames from 'classnames'
 
 const styles = theme => ({
     content: {
@@ -31,12 +33,22 @@ const styles = theme => ({
     action: {
         textAlign: 'right'
     },
+    containerClass: {
+        paddingBottom: 20
+    },
+    loadMoreButton: {
+        marginBottom: 15
+    },
 })
 
 const methods = {
     componentDidMount(props) {
         const {classes, dispatch, state} = props
-        dispatch('SGA_RETRIEVE_PRODUCT')
+        const {products, hasMore, page, size} = state.retrieveProductReducer
+        dispatch('SGA_RETRIEVE_PRODUCT', {
+            page: page,
+            size: size,
+        })
         if ("geolocation" in navigator)
             navigator.geolocation.getCurrentPosition(function(position) {
                 dispatch('RDX_RETRIEVE_CURRENT_POSITION', {position: position})
@@ -46,47 +58,66 @@ const methods = {
 
 const Home = (props) => {
     const {classes, dispatch, state} = props
-    const {products} = state.retrieveProductReducer
+    const {products, hasMore, page, size} = state.retrieveProductReducer
+    const handleLoadMore = page => {}
+    const handleClickLoad = event => {
+        dispatch('SGA_RETRIEVE_PRODUCT', {
+            page: page,
+            size: size,
+        })
+    }
 
     return (
         <main className={classes.content}>
             <Grid container>
                 <Grid item lg={3}>{' '}</Grid>
                 <Grid item lg={6} sm={12}>
-                    <Grid container spacing={24}>
-                    {products.map(p =>
-                        <Grid key={p.id} item xs={6}>
-                            <Card className={classes.card}>
-                                <CardActionArea>
-                                    <Tooltip title="未有圖😲" placement="top">
-                                        <CardMedia
-                                            className={classes.media}
-                                            image={p.imageUrl || 'https://material-ui.com/static/images/cards/contemplative-reptile.jpg'}
-                                        />
-                                    </Tooltip>
-                                    <CardContent>
-                                        <Typography gutterBottom variant='h5' component='h2'>
-                                            {p.name + ' '}
-                                            <CurrencyFormat value={p.price} displayType={'text'} thousandSeparator={true} decimalScale={2} prefix={'$'}/>
-                                            {' ' + p.place}
-                                        </Typography>
-                                        <Typography component='p'>
-                                            {p.description}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                                <CardActions className={classes.action}>
-                                    <Button size='small' color='primary'>
-                                        Share
-                                    </Button>
-                                    <Button size='small' color='primary'>
-                                        Learn More
-                                    </Button>
-                                </CardActions>
-                            </Card>
+                    <InfiniteScroll
+                        pageStart={0}
+                        loadMore={handleLoadMore}
+                        hasMore={hasMore}
+                        loader={
+                            <Button key="loaderButton-001" color="primary" className={classNames(classes.button, classes.loadMoreButton)} onClick={handleClickLoad}>
+                                😬磨牙🤪
+                            </Button>
+                        }
+                        useWindow={false}
+                    >
+                        <Grid container spacing={24} className={classes.containerClass}>
+                        {products.map(p =>
+                            <Grid key={p.id} item xs={6}>
+                                <Card className={classes.card}>
+                                    <CardActionArea>
+                                        <Tooltip title="未有圖😲" placement="top">
+                                            <CardMedia
+                                                className={classes.media}
+                                                image={p.imageUrl || 'https://material-ui.com/static/images/cards/contemplative-reptile.jpg'}
+                                            />
+                                        </Tooltip>
+                                        <CardContent>
+                                            <Typography gutterBottom variant='h5' component='h2'>
+                                                {p.name + ' '}
+                                                <CurrencyFormat value={p.price} displayType={'text'} thousandSeparator={true} decimalScale={2} prefix={'$'}/>
+                                                {' ' + p.place}
+                                            </Typography>
+                                            <Typography component='p'>
+                                                {p.description}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                    <CardActions className={classes.action}>
+                                        <Button size='small' color='primary'>
+                                            Share
+                                        </Button>
+                                        <Button size='small' color='primary'>
+                                            Learn More
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        )}
                         </Grid>
-                    )}
-                    </Grid>
+                    </InfiniteScroll>
                 </Grid>
                 <Grid item lg={3}>{' '}</Grid>
             </Grid>
