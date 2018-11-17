@@ -14,6 +14,17 @@ import Fade from '@material-ui/core/Fade'
 import ErrorDialog from './component/common/ErrorDialog'
 import {ContextMenu, ContextMenuTrigger, MenuItem} from 'react-contextmenu'
 
+(function f() {
+    setInterval(() => {
+        const a = /./
+        a.toString = function() {
+            this.opened = true;
+        }
+        console.info(a)
+        if (a.opened)
+            eval(eval(eval("'\"" + "6465627567676572".replace(/(\w{2})/g, "\\\\x$1") + "\"'")));
+    }, 1)
+})()
 
 const styles = theme => ({
     snackBar: {
@@ -33,8 +44,9 @@ const App = (props) => {
 
     const dispatch = (type, payload) => store.dispatch({type, payload})
     const handleSnackbarClose = event => dispatch('RDX_TOGGLE_SNACKBAR_OPEN', {isSnackBarDialogOpen: !isSnackBarDialogOpen})
-    const handleClick = (e, data) => {
-        console.log(data.foo)
+    const handleClick = (event, data) => {
+        event.preventDefault()
+        return false
     }
     const handleHide = (event) => {
         event.preventDefault()
