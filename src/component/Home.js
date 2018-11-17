@@ -39,7 +39,7 @@ const methods = {
         dispatch('SGA_RETRIEVE_PRODUCT')
         if ("geolocation" in navigator)
             navigator.geolocation.getCurrentPosition(function(position) {
-                dispatch('SGA_RETRIEVE_CURRENT_POSITION', {position: position})
+                dispatch('RDX_RETRIEVE_CURRENT_POSITION', {position: position})
             })
     }
 }

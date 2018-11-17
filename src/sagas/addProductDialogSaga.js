@@ -3,13 +3,16 @@ import axios from 'axios'
 
 function* doRetrieve(action) {
     try {
+        const payload = action.payload
         const api = () =>
             axios.post('/product', {
-                name: action.payload.name,
-                price: action.payload.price,
-                place: action.payload.place,
-                description: action.payload.description,
-                imageUrl: action.payload.imageUrl,
+                name: payload.name,
+                price: payload.price,
+                place: payload.place,
+                description: payload.description,
+                imageUrl: payload.imageUrl,
+                latitude: payload.position.coords.latitude,
+                longitude: payload.position.coords.longitude,
             })
         const result = yield call(api)
         yield put({type: 'RDX_TOGGLE_PRODUCT_DIALOG_OPEN', payload: {

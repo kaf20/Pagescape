@@ -20,6 +20,7 @@ const styles = theme => ({
 const AddProductDialog = (props) => {
     const {classes, dispatch, state, theme} = props
     const {isAddProductDialogOpen, name, price, place} = state.addProductDialogReducer
+    const {position} = state.retrieveCurrentPositionReducer
 
     const handleTextFieldChange = (event, payload) => dispatch('RDX_PRODUCT_DIALOG_TEXTFIELD_CHANGE', payload)
     const handleToggleProductDialogCancel = event => dispatch('RDX_TOGGLE_PRODUCT_DIALOG_OPEN', {isAddProductDialogOpen: !isAddProductDialogOpen})
@@ -28,6 +29,7 @@ const AddProductDialog = (props) => {
         name: name,
         price: price,
         place: place,
+        position: position,
     })
     const handleToggleProductDialog = event => dispatch('RDX_TOGGLE_PRODUCT_DIALOG_OPEN', {isAddProductDialogOpen: !isAddProductDialogOpen})
     const okToSubmit = !!name && !!price && !!place
