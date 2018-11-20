@@ -1,10 +1,10 @@
 {
-  "name": "c9w-ui",
+  "name": "catalog-ui",
   "version": "0.1.0",
   "description": "Pricing Tracker",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaf20/c9w-ui.git"
+    "url": "git+https://github.com/kaf20/catalog-ui.git"
   },
   "author": "LAU KA FAI <nelson.kf.lau@gmail.com>",
   "dependencies": {
