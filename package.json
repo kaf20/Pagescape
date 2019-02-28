@@ -1,10 +1,10 @@
 {
-  "name": "catalog-ui",
+  "name": "vibranium",
   "version": "0.0.2-SNAPSHOT",
   "description": "Pricing Tracker",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaf20/catalog-ui.git"
+    "url": "git+https://github.com/kaf20/vibranium.git"
   },
   "author": "LAU KA FAI <nelson.kf.lau@gmail.com>",
   "dependencies": {
