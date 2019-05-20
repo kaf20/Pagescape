@@ -1,45 +1,46 @@
 {
   "name": "vibranium",
-  "version": "0.0.2-SNAPSHOT",
-  "description": "Pricing Tracker",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kaf20/vibranium.git"
-  },
-  "author": "LAU KA FAI <nelson.kf.lau@gmail.com>",
-  "dependencies": {
-    "@material-ui/core": "^3.4.0",
-    "@material-ui/icons": "^3.0.1",
-    "axios": "^0.18.0",
-    "classnames": "^2.2.6",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.0",
-    "react-contextmenu": "^2.10.0",
-    "react-currency-format": "^1.0.0",
-    "react-dom": "^16.6.0",
-    "react-google-maps": "^9.4.5",
-    "react-infinite-scroller": "^1.2.2",
-    "react-pure-lifecycle": "^3.0.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1",
-    "react-table": "^6.8.6",
-    "recompose": "^0.30.0",
-    "redux": "^3.3.1",
-    "redux-saga": "^0.15.0"
-  },
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   },
   "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    "> 1%",
+    "last 2 versions"
   ]
 }
