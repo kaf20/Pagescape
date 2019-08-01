@@ -1,6 +1,6 @@
 <template>
-    <div class="facebookLoginContext">
-        <input type="button" class="loginButton" v-on:click="loginHandler" value="Facebook"/>
+    <div class="FacebookLogin">
+        <input type="button" class="loginButton" v-on:click="handleLogin" value="Facebook"/>
     </div>
 </template>
 
@@ -8,12 +8,9 @@
     const facebookService = require("../js/FacebookService.js");
 
     export default {
-        name: 'HelloWorld',
-        props: {
-            msg: String
-        },
+        name: 'facebookLogin',
         methods: {
-            loginHandler: () => {
+            handleLogin: () => {
                 facebookService.login();
             }
         }
