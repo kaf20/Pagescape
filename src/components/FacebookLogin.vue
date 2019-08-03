@@ -8,7 +8,7 @@
     const facebookService = require("../js/FacebookService.js");
 
     export default {
-        name: 'facebookLogin',
+        name: 'FacebookLogin',
         methods: {
             handleLogin: () => {
                 facebookService.login();
