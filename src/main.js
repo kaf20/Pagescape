@@ -5,6 +5,7 @@ import Privacy from "./components/Privacy";
 import App from "./App";
 import PostPanel from "./components/PostPanel";
 import "vue-material/dist/vue-material.min.css";
+import 'vue-material/dist/theme/default.css';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
