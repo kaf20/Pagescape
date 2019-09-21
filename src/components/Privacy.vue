@@ -1,14 +1,15 @@
 <template>
     <div id="privacyPolicy" class="page-container">
-        <md-app>
+        <md-app md-mode="reveal">
             <md-app-toolbar class="md-primary">
+                <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+                    <md-icon>menu</md-icon>
+                </md-button>
                 <span class="md-title">Greetings!</span>
             </md-app-toolbar>
 
-            <md-app-drawer md-permanent="full">
-                <md-toolbar class="md-transparent" md-elevation="0">
-
-                </md-toolbar>
+            <md-app-drawer :md-active.sync="menuVisible">
+                <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
 
                 <DrawerItems/>
             </md-app-drawer>
@@ -31,14 +32,16 @@
     import DrawerItems from "./DrawerItems";
     export default {
         name: 'Privacy',
+        data: () => ({
+            menuVisible: false
+        }),
         components: {DrawerItems}
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
     .md-app {
-        max-height: 400px;
+        min-height: 850px;
         border: 1px solid rgba(#000, .12);
     }
 

@@ -17,7 +17,7 @@
 
         <md-list-item>
             <md-icon>error</md-icon>
-            <span class="md-list-item-text">URL Shortener</span>
+            <span class="md-list-item-text"><a href="/url-shortener">URL Shortener</a></span>
         </md-list-item>
 
         <md-list-item>
