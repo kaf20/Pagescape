@@ -26,7 +26,7 @@
     import DrawerItems from "./components/DrawerItems";
 
     export default {
-        name: 'Normal',
+        name: "Normal",
         data: () => ({
             menuVisible: false
         }),

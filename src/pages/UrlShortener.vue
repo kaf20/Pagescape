@@ -18,7 +18,7 @@
         <md-dialog :md-active.sync="showDialog">
             <md-dialog-title>No idea about this path</md-dialog-title>
             <div class="redirectFailedUrl-container">
-                <p>{{ `http://localhost:18080/url-shortener/${$route.query.h}` }}</p>
+                <p>{{ `${serverContextPath}${$route.query.h}` }}</p>
             </div>
             <md-dialog-actions>
                 <md-button class="md-primary" @click="showDialog = false">Close</md-button>
@@ -39,13 +39,14 @@
         data: () => ({
             url: "",
             shortenedUrl: "",
+            serverContextPath: "https://pric.me/u/",
             menuVisible: false,
             showDialog: false
         }),
         methods: {
             onClick: function () {
-                axios.post("http://localhost:18080/url-shortener/encode", qs.stringify({url: this.url}))
-                    .then(response => this.shortenedUrl = `http://localhost:18080/url-shortener/${response.data.result}`);
+                axios.post(`${this.serverContextPath}/encode`, qs.stringify({url: this.url}))
+                    .then(response => this.shortenedUrl = `${this.serverContextPath}${response.data.result}`);
             }
         }
     }
