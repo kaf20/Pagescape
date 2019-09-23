@@ -2,7 +2,7 @@
     <div class="page-container">
 
         <md-app md-mode="reveal">
-            <md-app-toolbar class="md-primary">
+            <md-app-toolbar class="md-primary ps-toolbar">
                 <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
                     <md-icon>menu</md-icon>
                 </md-button>
@@ -43,5 +43,9 @@
     .md-drawer {
         width: 230px;
         max-width: calc(100vw - 125px);
+    }
+
+    .ps-toolbar {
+        background-color: #0043b3 !important;
     }
 </style>
